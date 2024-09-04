@@ -1,23 +1,19 @@
-import $ from 'jquery';
-import _ from 'lodash';
 import '../css/main.css';
+const $ = require('jquery');
+const _ = require('lodash');
 
-// Adding a new paragraph to the body
-$('body').append('<p>Holberton Dashboard</p>');
-$('body').append('<p>Dashboard data for the students</p>');
-$('body').append('<button>Click here to get started</button>');
-$('body').append("<p id='count'>{count} clicks on the button</p>");
-$('body').append('<p>Copyright - Holberton School</p>');
+let counter = 0;
 
-// Button click event function updateCounter() and tracks how many times button is clicked.
-$('#button').click(updateCounter);
-
-let count = 0;
+$("<div id='logo'> </div>").appendTo('body');
+$("<p>Holberton Dashboard</p>").appendTo('body');
+$("<p>Dashboard data for the students</p>").appendTo('body');
+$("<button>Click here to get started</button>").appendTo('body');
+$("<p id='count'></p>").appendTo('body');
+$("<p>Copyright - Holberton School</p>").appendTo('body');
 
 function updateCounter() {
-  count++;
-  $('#count').text(`${count} clicks on the button`);
+  counter++;
+  $('#count').html(`${counter} clicks on the button`);
 }
-// binding the debounce function to the click event on button
-const debounceUpdateCounter = _.debounce(updateCounter, 300);
-$('button').on('click', debounceUpdateCounter);
+
+$("button").on("click", _.debounce(updateCounter, 500));
