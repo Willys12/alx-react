@@ -1,0 +1,4 @@
+# Adding files that shouldn't be pushed.
+**/main.js
+
+node_modules/
