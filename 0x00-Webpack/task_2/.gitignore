@@ -1,4 +1,2 @@
 # Files that are not to be pushed to the github
 node_modules/
-**/bundle.js.LICENSE.txt
-package-lock.json
