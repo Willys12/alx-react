@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import logo from './holberton-logo.png'; // Replace 'logo.svg' with your actual Holberton logo image
+import logo from './Holberton_Logo.jpg'; // Replace 'logo.svg' with your actual Holberton logo image
 
 function App() {
   return (
