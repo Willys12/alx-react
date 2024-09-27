@@ -6,16 +6,15 @@ import CourseList from "../CourseList/CourseList";
 import Notifications from "../Notifications/Notifications";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
 import BodySection from "../BodySection/BodySection";
-import "./App.css";
+import { StyleSheet, css } from "aphrodite";
 import PropTypes from "prop-types";
 import { getLatestNotification } from "../utils/utils";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      displayDrawer: false, // the default state for the drawer.
-    };
+
+    this.state = { displayDrawer: false };
 
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
@@ -41,12 +40,15 @@ class App extends React.Component {
       this.props.logOut();
     }
   }
+
   handleDisplayDrawer() {
-    this.setState({displayDrawer: true});
+    this.setState({ displayDrawer: true });
   }
+
   handleHideDrawer() {
-    this.setState({displayDrawer: false});
+    this.setState({ displayDrawer: false });
   }
+
   componentDidMount() {
     document.addEventListener("keydown", this.handleKeyPress);
   }
@@ -58,13 +60,14 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="App">
+        <div className={css(styles.App)}>
           <div className="heading-section">
-            <Notifications 
-            listNotifications={this.listNotifications} 
-            displayDrawer={this.state.displayDrawer}
-            handleDisplayDrawer={this.handleDisplayDrawer}
-            handleHideDrawer={this.handleHideDrawer}/>
+            <Notifications
+              listNotifications={this.listNotifications}
+              displayDrawer={this.state.displayDrawer}
+              handleDisplayDrawer={this.handleDisplayDrawer}
+              handleHideDrawer={this.handleHideDrawer}
+            />
             <Header />
           </div>
           {this.props.isLoggedIn ? (
@@ -88,6 +91,15 @@ class App extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  App: {
+    height: "100vh",
+    maxWidth: "100vw",
+    position: "relative",
+    fontFamily: "Arial, Helvetica, sans-serif",
+  },
+});
 
 App.defaultProps = {
   isLoggedIn: false,
