@@ -9,6 +9,14 @@ import Footer from "../Footer/Footer";
 import Notifications from "../Notifications/Notifications";
 import CourseList from "../CourseList/CourseList";
 import { shallow, mount } from "enzyme";
+import { StyleSheetTestUtils } from "aphrodite";
+
+beforeEach(() => {
+  StyleSheetTestUtils.suppressStyleInjection();
+});
+afterEach(() => {
+  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
 
 describe("App tests", () => {
   it("renders without crashing", () => {
@@ -87,28 +95,33 @@ describe("When ctrl + h is pressed", () => {
   document.alert.mockClear();
 });
 
-  it("checks if displayDrawer set to false by default", () => {
-    const wrapper = shallow(<App />);
-    expect(wrapper.state().diplayDrawer).toEqual(false);
-  });
-  it("after calling handleDisplayDrawer, the state should now be true", () => {
-    const wrapper = shallow(<App />);
-    wrapper.instance().handleDisplayDrawer();
-    expect(wrapper.state().displayDrawer).toEqual(true);
+it("Has default state for displayDrawer false", () => {
+  const wrapper = shallow(<App />);
+  expect(wrapper.state().displayDrawer).toEqual(false);
+});
 
-    const instance = wrapper.instance();
-    instance.handleDisplayDrawer();
-    expect(wrapper.state().displayDrawer).toEqual(false);
-  });
-  it("the state should be updated to false after calling handleHideDrawer", () => {
-    const wrapper = shallow(<App />);
-    wrapper.instance().handleDisplayDrawer();
-    wrapper.instance().handleHideDrawer();
-    expect(wrapper.state().displayDrawer).toEqual(false);
+it("displayDrawer changes to true when calling handleDisplayDrawer", () => {
+  const wrapper = shallow(<App />);
+  expect(wrapper.state().displayDrawer).toEqual(false);
 
-    wrapper.instance.handleDisplayDrawer();
-    expect(wrapper.state().displayDrawer).toEqual(true);
+  const instance = wrapper.instance();
 
-    wrapper.instance().handleHideDrawer();
-    expect(wrapper.state().displayDrawer).toEqual(false);
-  });
+  instance.handleDisplayDrawer();
+
+  expect(wrapper.state().displayDrawer).toEqual(true);
+});
+
+it("displayDrawer changes to false when calling handleHideDrawer", () => {
+  const wrapper = shallow(<App />);
+  expect(wrapper.state().displayDrawer).toEqual(false);
+
+  // const instance = wrapper.instance();
+
+  wrapper.instance().handleDisplayDrawer();
+
+  expect(wrapper.state().displayDrawer).toEqual(true);
+
+  wrapper.instance().handleHideDrawer();
+
+  expect(wrapper.state().displayDrawer).toEqual(false);
+});
