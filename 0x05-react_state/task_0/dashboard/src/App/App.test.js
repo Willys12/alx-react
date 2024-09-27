@@ -95,10 +95,20 @@ describe("When ctrl + h is pressed", () => {
     const wrapper = shallow(<App />);
     wrapper.instance().handleDisplayDrawer();
     expect(wrapper.state().displayDrawer).toEqual(true);
+
+    const instance = wrapper.instance();
+    instance.handleDisplayDrawer();
+    expect(wrapper.state().displayDrawer).toEqual(false);
   });
   it("the state should be updated to false after calling handleHideDrawer", () => {
     const wrapper = shallow(<App />);
     wrapper.instance().handleDisplayDrawer();
+    wrapper.instance().handleHideDrawer();
+    expect(wrapper.state().displayDrawer).toEqual(false);
+
+    wrapper.instance.handleDisplayDrawer();
+    expect(wrapper.state().displayDrawer).toEqual(true);
+
     wrapper.instance().handleHideDrawer();
     expect(wrapper.state().displayDrawer).toEqual(false);
   });
