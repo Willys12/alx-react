@@ -18,11 +18,8 @@ describe("Test for Notifications.js", () => {
       ];
 
       const context = getAllNotificationsByUser("5debd764a7c57c7839d722e9");
-
-      if (context.length === 0) {
-        throw new Error("No notifications found");
-      }
-      expect(context.length).toBeGreaterThan(0);
-      expect(context).toEqual(expect.arrayContaining(result));
+    
+    expect(context.length).toBeGreaterThan(0);
+    expect(context).toEqual(expect.arrayContaining(result));
   });
 });
